@@ -127,7 +127,7 @@ stages:
         # echo " : $()"s
         echo "Build ArtifactStagingDirectory : $(Build.ArtifactStagingDirectory)"
 
-- stage: Build
+- stage: BuildAndPublish
   jobs:
   - job: BuildJob
     steps:
@@ -148,8 +148,6 @@ stages:
                     
           echo 'displaying content of index.html'
           cat index.html
-  - job: Publish
-    steps:
     - task: PublishBuildArtifacts@1
       inputs:
         pathToPublish: $(System.DefaultWorkingDirectory)/src/
