@@ -148,24 +148,31 @@ stages:
                     
           echo 'displaying content of index.html'
           cat index.html
+  - job: Publish
+    steps:
+    - task: PublishBuildArtifacts@1
+      inputs:
+        pathToPublish: $(System.DefaultWorkingDirectory)/src/
+        artifactName: 'drop'
+    
 
 - stage: Test
   jobs:
   - job: TestOnWindows
     steps:
     - script: echo displaying content form file index.html!
-    - script: echo "$(cat $(System.DefaultWorkingDirectory)/src/index.html)"
+    - script: echo "$(cat $(System.ArtifactStagingDirectory)/drop/index.html)"
   - job: TestOnLinux
     steps:
     - script: echo Testing on Linux!
-- stage: PublishArtifact
-  jobs:
-  - job: Publish
-    steps:
-    - script: echo Publishing the artifact!
+# - stage: PublishArtifact
+#   jobs:
+#   - job: Publish
+#     steps:
+#     - script: echo Publishing the artifact!
     
-    - script: type $(System.DefaultWorkingDirectory)/src/index.html
-    - task: PublishBuildArtifacts@1
-      inputs:
-        pathToPublish: $(System.DefaultWorkingDirectory)/src/
-        artifactName: 'drop'
+#     - script: type $(System.DefaultWorkingDirectory)/src/index.html
+#     - task: PublishBuildArtifacts@1
+#       inputs:
+#         pathToPublish: $(System.DefaultWorkingDirectory)/src/
+#         artifactName: 'drop'
