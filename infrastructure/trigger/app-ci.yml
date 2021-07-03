@@ -22,7 +22,8 @@ resources:
     #     - Production
 steps:
   - script: echo 'Build completed, now artifact will be downloaded'
-  # - downloadBuild: drop
-  #   artifact:
-  #   patterns:
+  - task: DownloadPipelineArtifact@2
+    inputs:
+      artifact: 'drop'
+      path: $(Build.SourcesDirectory)/bin
 
