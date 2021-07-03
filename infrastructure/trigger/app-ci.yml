@@ -1,7 +1,25 @@
 # this is being defined in app-ci pipeline
 resources:
   pipelines:
-  - pipeline: securitylib   # Name of the pipeline resource
-    source: security-lib-ci # Name of the pipeline referenced by the pipeline resource
-    project: FabrikamProject # Required only if the source pipeline is in another project
+  - pipeline: deployment   # Name of the pipeline resource
+    source: azure-build-pipeline.yml # Name of the pipeline referenced by the pipeline resource
+
+    # Trigger always. For example, on build deploy
     trigger: true # Run app-ci pipeline when any run of security-lib-ci completes
+
+    # # Trigger by condition. For example, with Tag: (UAT/PROD) and Branch : Master, then deploy on UAT
+    # trigger:
+    #   tags:
+    #     - Production
+    #     - Signed
+    #   branches:
+    #     include: 
+    #     - releases/*
+    #     exclude:
+    #     - releases/old*
+    #   stages:
+    #     - PreProduction
+    #     - Production
+steps:
+  - script: echo 'Build completed, now artifact will be downloaded'
+  - downloadBuild: 
