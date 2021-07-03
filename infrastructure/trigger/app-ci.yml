@@ -26,6 +26,13 @@ resources:
     #     - Production
 steps:
   - script: echo 'Build completed, now artifact will be downloaded'
-  - download: source
-    artifact: drop
+  - task: DownloadPipelineArtifact@2
+    inputs:
+      source: 'current'
+      Project: azure-pipeline-demo
+      pipeline: 17
+      preferTriggeringPipeline: true
+      runVersion: latest
+
+
 
