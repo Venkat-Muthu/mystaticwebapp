@@ -136,7 +136,7 @@ stages:
       inputs:
         targetType: inline
         script: |
-          currentDate='date +"%Y-%m-%d %T"';
+          currentDate=`date +"%Y-%m-%d %T"`;
           echo $currentDate
           sed -i "s/datetimeplaceholder/$currentDate/" $(System.DefaultWorkingDirectory)/src/index.html
           cat $(System.DefaultWorkingDirectory)/src/index.html
