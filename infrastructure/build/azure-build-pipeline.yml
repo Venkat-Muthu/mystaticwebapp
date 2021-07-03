@@ -138,7 +138,7 @@ stages:
         script: |
           currentDate=`date +"%D %T"`;
           echo $currentDate
-          sed -i "s/datetime/$currentDate/" $(System.DefaultWorkingDirectory)/src/index.html
+          sed -i "s/datetimeplaceholder/$currentDate/" $(System.DefaultWorkingDirectory)/src/index.html
           cat $(System.DefaultWorkingDirectory)/src/index.html
 
 
