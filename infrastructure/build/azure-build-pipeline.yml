@@ -124,7 +124,7 @@ stages:
         # echo " : $()"
         # echo " : $()"
         # echo " : $()"
-        # echo " : $()"
+        # echo " : $()"s
         echo "Build ArtifactStagingDirectory : $(Build.ArtifactStagingDirectory)"
 
 - stage: Build
@@ -138,9 +138,10 @@ stages:
         script: |
           currentDate=`date +"%Y-%m-%d %T"`;
           echo $currentDate
-          sed -i "s/datetimeplaceholder/$currentDate/" $(System.DefaultWorkingDirectory)/src/index.html
+          ls
+          cd $(System.DefaultWorkingDirectory)/src
+          sed -i "s/datetimeplaceholder/$currentDate/" index.html > index.html.new && mv index.html.new index.html && del index.html.new
           cat $(System.DefaultWorkingDirectory)/src/index.html
-
 
 - stage: Test
   jobs:
