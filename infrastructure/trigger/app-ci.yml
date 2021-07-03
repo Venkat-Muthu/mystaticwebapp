@@ -33,6 +33,20 @@ steps:
       pipeline: 17
       preferTriggeringPipeline: true
       runVersion: latest
+      
+  - task: Bash@3
+    inputs:
+      targetType: inline
+      script: |
+        echo "listing files"
+        ls
+
+  - task: AzureStaticWebApp@0
+    inputs:
+      app_location: '/'
+      api_location: 'api'
+      output_location: ''
+      azure_static_web_apps_api_token: "c805a9a0e530655ec27fdc35f26a89bf0ee9142f095b1ded340859b79b3f20f60-36811deb-9515-4f55-93de-51efa92fd99000f11778"
 
 
 
