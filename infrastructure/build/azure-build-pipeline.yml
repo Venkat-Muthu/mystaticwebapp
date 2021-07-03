@@ -36,6 +36,7 @@ stages:
         echo "Agent.TempDirectory : $(Agent.TempDirectory)"
         echo "Agent.ToolsDirectory : $(Agent.ToolsDirectory)"
         echo "Agent.WorkFolder : $(Agent.WorkFolder)"
+        echo ""
 
         echo "Build variables (DevOps Services)"
         echo "Agent.BuildDirectory : $(Agent.BuildDirectory)"
@@ -73,6 +74,7 @@ stages:
         echo "Build.TriggeredBy.BuildNumber : $(Build.TriggeredBy.BuildNumber)"
         echo "Build.TriggeredBy.ProjectID : $(Build.TriggeredBy.ProjectID)"
         echo "Common.TestResultsDirectory : $(Common.TestResultsDirectory)"
+        echo ""
 
         echo "Pipeline variables (DevOps Services)"
         echo "Pipeline.Workspace : $(Pipeline.Workspace)"
@@ -83,6 +85,7 @@ stages:
         echo "Environment.ResourceId : $(Environment.ResourceId)"
         echo "Strategy.Name : $(Strategy.Name)"
         echo "Strategy.CycleName : $(Strategy.CycleName)"
+        echo ""
 
         echo "System variables (DevOps Services)"
         echo "System.AccessToken : $(System.AccessToken)"
@@ -111,6 +114,7 @@ stages:
         echo "System.TeamProject : $(System.TeamProject)"
         echo "System.TeamProjectId : $(System.TeamProjectId)"
         echo "TF_BUILD : $(TF_BUILD)"
+        echo ""
 
         echo "Checks variables (DevOps Services)"
         echo "Checks.StageAttempt : $(Checks.StageAttempt)"
@@ -121,16 +125,23 @@ stages:
         # echo " : $()"
         # echo " : $()"
         # echo " : $()"
-
-
-
-
         echo "Build ArtifactStagingDirectory : $(Build.ArtifactStagingDirectory)"
+
 - stage: Build
   jobs:
   - job: BuildJob
     steps:
     - script: echo Building!
+    - task: Bash@3
+      inputs:
+        targetType: inline
+        script: |
+          currentDate=`date +"%D %T"`;
+          echo currentDate
+          sed -i 's/datetime/currentDate/' $(System.DefaultWorkingDirectory)/src/index.html
+          cat $(System.DefaultWorkingDirectory)/src/index.html
+
+
 - stage: Test
   jobs:
   - job: TestOnWindows
@@ -144,3 +155,7 @@ stages:
   - job: Publish
     steps:
     - script: echo Publishing the artifact!
+    - task: PublishBuildArtifacts@1
+      inputs:
+        pathToPublish: $(System.DefaultWorkingDirectory)/src/
+        artifactName: 'drop'
