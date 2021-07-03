@@ -9,7 +9,7 @@ resources:
 
     trigger:
       stages:
-        - BuildAndPublish
+        - Test
     # # Trigger by condition. For example, with Tag: (UAT/PROD) and Branch : Master, then deploy on UAT
     # trigger:
     #   tags:
