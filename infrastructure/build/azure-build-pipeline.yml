@@ -154,6 +154,7 @@ stages:
   - job: TestOnWindows
     steps:
     - script: echo Testing on Windows!
+    - script: type $(System.DefaultWorkingDirectory)/src/index.html
   - job: TestOnLinux
     steps:
     - script: echo Testing on Linux!
@@ -162,6 +163,8 @@ stages:
   - job: Publish
     steps:
     - script: echo Publishing the artifact!
+    
+    - script: type $(System.DefaultWorkingDirectory)/src/index.html
     - task: PublishBuildArtifacts@1
       inputs:
         pathToPublish: $(System.DefaultWorkingDirectory)/src/
