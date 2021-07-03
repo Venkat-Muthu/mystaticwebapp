@@ -33,11 +33,14 @@ steps:
       pipeline: 17
       preferTriggeringPipeline: true
       runVersion: latest
-      
+
   - task: Bash@3
     inputs:
       targetType: inline
       script: |
+        echo "Working directory :"
+        echo $(System.DefaultWorkingDirectory)
+        
         echo "listing files"
         ls
 
