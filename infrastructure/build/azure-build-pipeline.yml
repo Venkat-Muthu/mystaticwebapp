@@ -153,8 +153,8 @@ stages:
   jobs:
   - job: TestOnWindows
     steps:
-    - script: echo Testing on Windows!
-    - script: type $(System.DefaultWorkingDirectory)/src/index.html
+    - script: echo displaying content form file index.html!
+    - script: echo "$(cat $(System.DefaultWorkingDirectory)/src/index.html)
   - job: TestOnLinux
     steps:
     - script: echo Testing on Linux!
