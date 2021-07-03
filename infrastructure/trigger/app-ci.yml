@@ -1,3 +1,4 @@
+trigger: none
 # this is being defined in app-ci pipeline
 resources:
   pipelines:
