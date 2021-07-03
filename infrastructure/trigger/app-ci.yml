@@ -2,7 +2,7 @@
 resources:
   pipelines:
   - pipeline: deployment   # Name of the pipeline resource
-    source: azure-build-pipeline.yml # Name of the pipeline referenced by the pipeline resource
+    source: build # Name of the pipeline referenced by the pipeline resource
 
     # Trigger always. For example, on build deploy
     trigger: true # Run app-ci pipeline when any run of security-lib-ci completes
