@@ -22,7 +22,7 @@ resources:
     #     - Production
 steps:
   - script: echo 'Build completed, now artifact will be downloaded'
-  - downloadBuild:
+  - downloadBuild: drop
     artifact:
     patterns:
 
