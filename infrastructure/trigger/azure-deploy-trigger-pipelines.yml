@@ -17,7 +17,7 @@ steps:
         echo $PWD
 
         echo "Build.ArtifactStagingDirectory : $(Build.ArtifactStagingDirectory)"
-        echo "System.ArtifactStagingDirectory : $(System.ArtifactStagingDirectory)"
+        echo "Build.BinariesDirectory : $(Build.BinariesDirectory)"
         echo "SourcesDirectory : $(Build.SourcesDirectory)"
         echo "DefaultWorkingDirectory : $(System.DefaultWorkingDirectory)"
         echo "BuildDirectory : $(Agent.BuildDirectory)"
