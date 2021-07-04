@@ -33,7 +33,6 @@ steps:
       pipeline: 17
       prefertriggeringpipeline: true
       runversion: latest
-      path: $(Build.DefaultWorkingDirectory)
 
   - task: Bash@3
     displayName: 
@@ -54,7 +53,7 @@ steps:
 
         echo "SourcesDirectory : $(Build.SourcesDirectory)"
         echo "DefaultWorkingDirectory : $(System.DefaultWorkingDirectory)"
-        echo "ArtifactStagingDirectory : $(System.ArtifactStagingDirectory)"
+        echo "ArtifactStagingDirectory : $(Build.ArtifactStagingDirectory)"
         echo "BuildDirectory : $(Agent.BuildDirectory)"
 
         echo "DefaultWorkingDirectory :"
@@ -62,7 +61,7 @@ steps:
         echo "listing files"
         ls
 
-        echo $(cat $(System.SourcesDirectory)/src/index.html)
+        echo $(cat ./src/index.html)
 
         echo "Switching to ArtifactStagingDirectory"
         cd $(Build.ArtifactStagingDirectory)
