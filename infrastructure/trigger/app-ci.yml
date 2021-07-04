@@ -26,13 +26,14 @@ resources:
     #     - Production
 steps:
   - script: echo 'Build completed, now artifact will be downloaded'
-  # - task: DownloadPipelineArtifact@2
-  #   inputs:
-  #     source: 'current'
-  #     Project: azure-pipeline-demo
-  #     pipeline: 17
-  #     preferTriggeringPipeline: true
-  #     runVersion: latest
+  - task: downloadpipelineartifact@2
+    inputs:
+      source: 'current'
+      project: azure-pipeline-demo
+      pipeline: 17
+      prefertriggeringpipeline: true
+      runversion: latest
+      path: $(Build.SourcesDirectory)
 
   - task: Bash@3
     inputs:
@@ -43,15 +44,16 @@ steps:
         echo $PWD
 
         echo "Working directory :"
-        echo $(System.DefaultWorkingDirectory)
+        echo $(System.SourcesDirectory)
 
         echo "listing files"
         ls
 
-        echo $(cat $(System.DefaultWorkingDirectory)/src/index.html)
+        echo $(cat $(System.SourcesDirectory)/src/index.html)
 
         echo "Switching to ArtifactStagingDirectory"
         cd $(Build.ArtifactStagingDirectory)
+        echo $PWD
 
         echo "listing files"
         ls
