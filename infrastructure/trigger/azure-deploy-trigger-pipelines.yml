@@ -1,0 +1,34 @@
+trigger: none
+# this is being defined in app-ci pipeline
+resources:
+  pipelines:
+  - pipeline: deployment   # Name of the pipeline resource
+    source: build # Name of the pipeline referenced by the pipeline resource
+    trigger: true
+
+stages:
+  - stage: Dev-Deploy
+    jobs:
+    - deployment: DEV
+      pool:
+        vmImage: 'ubuntu-latest'
+      environment: DEV
+      strategy:
+        runOnce:
+          deploy:
+            steps:
+              - bash: echo "##vso[task.setvariable variable=myOutputVar;isOutput=true]this is the deployment variable value"
+                name: setvarStep
+              - bash: echo $(setvarStep.myOutputVar)
+                name: echovar
+    
+    # Map the variable from the job.
+    - job: B
+      dependsOn: DEV
+      pool:
+        vmImage: 'ubuntu-16.04'
+      variables:
+        myVarFromDeploymentJob: $[ dependencies.DEV.outputs['DEV.setvarStep.myOutputVar'] ]
+      steps:
+      - script: "echo $(myVarFromDeploymentJob)"
+        name: echovar
