@@ -19,8 +19,8 @@ steps:
         # echo "rm -r ./*"
         # rm -r ./*
 
-        echo "Switching directory to BuildDirectory"
-        cd $(Agent.BuildDirectory)
+        echo "Switching directory to ArtifactStagingDirectory"
+        cd $(Build.ArtifactStagingDirectory)
         echo $PWD
 
         echo "Listing files and folders"
