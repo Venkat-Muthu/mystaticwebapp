@@ -8,6 +8,42 @@ resources:
 
 steps:
   - script: echo 'Build completed, now artifact will be downloaded'
+  - task: Bash@3
+    inputs:
+      targetType: inline
+      script: |
+
+        echo "Current directory"
+        echo $PWD
+
+        # echo "rm -r ./*"
+        # rm -r ./*
+
+        echo "Switching directory to BuildDirectory"
+        cd $(Agent.BuildDirectory)
+        echo $PWD
+
+        echo "Listing files and folders"
+        ls
+
+        cp -r $(Agent.BuildDirectory)/drop $(Build.SourcesDirectory)
+
+        echo "SourcesDirectory : $(Build.SourcesDirectory)"
+        echo "DefaultWorkingDirectory : $(System.DefaultWorkingDirectory)"
+        echo "ArtifactStagingDirectory : $(Build.ArtifactStagingDirectory)"
+        echo "BuildDirectory : $(Agent.BuildDirectory)"
+
+        echo "listing files"
+        ls
+
+        echo $(cat ./src/index.html)
+
+        echo "Switching to ArtifactStagingDirectory"
+        cd $(Build.ArtifactStagingDirectory)
+        echo $PWD
+
+        echo "listing files"
+        ls
 # stages:
 #   - stage: devdeploy
 #     jobs:
