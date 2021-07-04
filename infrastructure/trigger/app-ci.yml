@@ -51,9 +51,16 @@ steps:
         echo "Current directory"
         echo $PWD
 
-        rm -r $(Build.SourcesDirectory)/*
+        # echo "rm -r ./*"
+        # rm -r ./*
 
-        cp -r $(Agent.BuildDirectory)/src $(Build.SourcesDirectory)
+        echo "Switching directory to BuildDirectory"
+        cd $(Agent.BuildDirectory)
+
+        echo "Listing files and folders"
+        ls
+
+        cp -r $(Agent.BuildDirectory)/drop $(Build.SourcesDirectory)
 
         echo "SourcesDirectory : $(Build.SourcesDirectory)"
         echo "DefaultWorkingDirectory : $(System.DefaultWorkingDirectory)"
