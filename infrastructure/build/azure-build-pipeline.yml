@@ -150,7 +150,7 @@ stages:
           cat index.html
     - task: PublishBuildArtifacts@1
       inputs:
-        pathToPublish: $(Build.DefaultWorkingDirectory)/src/
+        pathToPublish: $(System.DefaultWorkingDirectory)/src/
         artifactName: 'drop'
     
 
