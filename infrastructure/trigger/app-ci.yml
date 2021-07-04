@@ -25,6 +25,7 @@ resources:
     #     - PreProduction
     #     - Production
 steps:
+  - checkout: null
   - script: echo 'Build completed, now artifact will be downloaded'
   - task: downloadpipelineartifact@2
     inputs:
@@ -55,8 +56,6 @@ steps:
         echo "DefaultWorkingDirectory : $(System.DefaultWorkingDirectory)"
         echo "ArtifactStagingDirectory : $(Build.ArtifactStagingDirectory)"
         echo "BuildDirectory : $(Agent.BuildDirectory)"
-
-        echo "DefaultWorkingDirectory :"
 
         echo "listing files"
         ls
