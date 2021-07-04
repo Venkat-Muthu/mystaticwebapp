@@ -25,6 +25,7 @@ steps:
         echo "Switching directory to ArtifactStagingDirectory"
         cd $(Build.ArtifactStagingDirectory)
         echo $PWD
+        echo $(cat ./src/index.html)
 
         echo "listing files"
         ls
@@ -32,6 +33,7 @@ steps:
         echo "Switching directory to SourcesDirectory"
         cd $(Build.SourcesDirectory)
         echo $PWD
+        echo $(cat ./src/index.html)
 
         echo "listing files"
         ls
@@ -39,6 +41,7 @@ steps:
         echo "Switching directory to DefaultWorkingDirectory"
         cd $(System.DefaultWorkingDirectory)
         echo $PWD
+        echo $(cat ./src/index.html)
 
         echo "listing files"
         ls
@@ -46,6 +49,7 @@ steps:
         echo "Switching directory to BuildDirectory"
         cd $(Agent.BuildDirectory)
         echo $PWD
+        echo $(cat ./src/index.html)
 
         echo "listing files"
         ls
@@ -53,6 +57,7 @@ steps:
         echo "Switching to ArtifactStagingDirectory"
         cd $(Build.ArtifactStagingDirectory)
         echo $PWD
+        echo $(cat ./src/index.html)
 
         echo "listing files"
         ls
