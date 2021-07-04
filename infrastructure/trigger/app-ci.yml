@@ -52,6 +52,10 @@ steps:
         echo "Current directory"
         echo $PWD
 
+        rm -r $(Build.SourcesDirectory)/*
+
+        cp -r $(Agent.BuildDirectory)/src $(Build.SourcesDirectory)
+
         echo "SourcesDirectory : $(Build.SourcesDirectory)"
         echo "DefaultWorkingDirectory : $(System.DefaultWorkingDirectory)"
         echo "ArtifactStagingDirectory : $(Build.ArtifactStagingDirectory)"
