@@ -9,7 +9,7 @@ resources:
 stages:
   - stage: Dev-Deploy
     jobs:
-    - deployment: DEV
+    - deployment: drop
       pool:
         vmImage: 'ubuntu-latest'
       environment: DEV
