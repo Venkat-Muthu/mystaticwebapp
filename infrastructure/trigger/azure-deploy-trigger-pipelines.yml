@@ -16,27 +16,39 @@ steps:
         echo "Current directory"
         echo $PWD
 
-        # echo "rm -r ./*"
-        # rm -r ./*
+        echo "Build.ArtifactStagingDirectory : $(Build.ArtifactStagingDirectory)"
+        echo "System.ArtifactStagingDirectory : $(System.ArtifactStagingDirectory)"
+        echo "SourcesDirectory : $(Build.SourcesDirectory)"
+        echo "DefaultWorkingDirectory : $(System.DefaultWorkingDirectory)"
+        echo "BuildDirectory : $(Agent.BuildDirectory)"
 
         echo "Switching directory to ArtifactStagingDirectory"
         cd $(Build.ArtifactStagingDirectory)
         echo $PWD
 
-        echo "Listing files and folders"
+        echo "listing files"
         ls
 
-        cp -r $(Agent.BuildDirectory)/drop $(Build.SourcesDirectory)
-
-        echo "SourcesDirectory : $(Build.SourcesDirectory)"
-        echo "DefaultWorkingDirectory : $(System.DefaultWorkingDirectory)"
-        echo "ArtifactStagingDirectory : $(Build.ArtifactStagingDirectory)"
-        echo "BuildDirectory : $(Agent.BuildDirectory)"
+        echo "Switching directory to SourcesDirectory"
+        cd $(Build.SourcesDirectory)
+        echo $PWD
 
         echo "listing files"
         ls
 
-        echo $(cat ./src/index.html)
+        echo "Switching directory to DefaultWorkingDirectory"
+        cd $(System.DefaultWorkingDirectory)
+        echo $PWD
+
+        echo "listing files"
+        ls
+
+        echo "Switching directory to BuildDirectory"
+        cd $(Agent.BuildDirectory)
+        echo $PWD
+
+        echo "listing files"
+        ls
 
         echo "Switching to ArtifactStagingDirectory"
         cd $(Build.ArtifactStagingDirectory)
