@@ -33,7 +33,16 @@ steps:
       pipeline: 17
       prefertriggeringpipeline: true
       runversion: latest
-      path: $(Build.SourcesDirectory)
+      path: $(Build.DefaultWorkingDirectory)
+
+  - task: Bash@3
+    displayName: 
+    inputs:
+      targetType: inline
+      script: |
+
+        echo "Current directory"
+        echo $PWD
 
   - task: Bash@3
     inputs:
@@ -43,8 +52,12 @@ steps:
         echo "Current directory"
         echo $PWD
 
-        echo "Working directory :"
-        echo $(System.SourcesDirectory)
+        echo "SourcesDirectory : $(Build.SourcesDirectory)"
+        echo "DefaultWorkingDirectory : $(System.DefaultWorkingDirectory)"
+        echo "ArtifactStagingDirectory : $(System.ArtifactStagingDirectory)"
+        echo "BuildDirectory : $(Agent.BuildDirectory)"
+
+        echo "DefaultWorkingDirectory :"
 
         echo "listing files"
         ls
