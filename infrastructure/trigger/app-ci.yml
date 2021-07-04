@@ -25,7 +25,6 @@ resources:
     #     - PreProduction
     #     - Production
 steps:
-  - deployment: deploy
   - script: echo 'Build completed, now artifact will be downloaded'
   - task: downloadpipelineartifact@2
     inputs:
