@@ -54,7 +54,6 @@ jobs:
   #     artifactName: drop
 
   - task: archivefiles@2
-    displayname: 'archive files'
     inputs:
       rootfolderorfile: '$(system.defaultworkingdirectory)/src'
       includerootfolder: false
