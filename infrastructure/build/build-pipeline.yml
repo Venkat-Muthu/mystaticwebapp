@@ -38,29 +38,29 @@ jobs:
         echo 'displaying content of index.html'
         cat index.html
 
-  - task: CopyFiles@2
-    inputs:
-      sourceFolder: '$(System.DefaultWorkingDirectory)/src/' # Optional
-      contents: '**' 
-      targetFolder: $(Build.ArtifactStagingDirectory)/src/
-      cleanTargetFolder: true # Optional
-      overWrite: false # Optional
-      #flattenFolders: false # Optional
-      preserveTimestamp: true # Optional
-
-  - task: PublishBuildArtifacts@1
-    inputs:
-      pathToPublish: $(Build.ArtifactStagingDirectory)/src/
-      artifactName: drop
-
-  # - task: ArchiveFiles@2
-  #   displayName: 'Archive files'
+  # - task: CopyFiles@2
   #   inputs:
-  #     rootFolderOrFile: '$(System.DefaultWorkingDirectory)/src'
-  #     includeRootFolder: false
-  #     archiveType: zip
-  #     archiveFile: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
-  #     replaceExistingArchive: true
+  #     sourceFolder: '$(System.DefaultWorkingDirectory)/src/' # Optional
+  #     contents: '**' 
+  #     targetFolder: $(Build.ArtifactStagingDirectory)/src/
+  #     cleanTargetFolder: true # Optional
+  #     overWrite: false # Optional
+  #     #flattenFolders: false # Optional
+  #     preserveTimestamp: true # Optional
 
-  # - upload: $(Build.ArtifactStagingDirectory)/src/
-  #   artifact: drop
+  # - task: PublishBuildArtifacts@1
+  #   inputs:
+  #     pathToPublish: $(Build.ArtifactStagingDirectory)/src/
+  #     artifactName: drop
+
+  - task: archivefiles@2
+    displayname: 'archive files'
+    inputs:
+      rootfolderorfile: '$(system.defaultworkingdirectory)/src'
+      includerootfolder: false
+      archivetype: zip
+      archivefile: $(build.artifactstagingdirectory)/$(build.buildid).zip
+      replaceexistingarchive: true
+
+  - upload: $(build.artifactstagingdirectory)/$(build.buildid).zip
+    artifact: drop

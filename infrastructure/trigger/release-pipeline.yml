@@ -22,18 +22,27 @@ jobs:
   strategy:
     runOnce:
       deploy:
-        steps:          
+        steps:
         - download: myappbuild
-          artifact: drop
-        - task: CopyFiles@2
+          artifact: drop  
+        - task: ExtractFiles@1
           inputs:
-            sourceFolder: '$(PIPELINE.WORKSPACE)/myappbuild/drop/' # Optional
-            contents: '**' 
-            targetFolder: $(agent.builddirectory)/
-            cleanTargetFolder: true # Optional
-            overWrite: false # Optional
-            #flattenFolders: false # Optional
-            preserveTimestamp: true # Optional
-
+            archiveFilePatterns: '$(PIPELINE.WORKSPACE)/myappbuild/drop/$(resources.pipeline.myappbuild.runID).zip'
+            destinationFolder: '$(agent.builddirectory)'
+            cleanDestinationFolder: false
         - script: |  
             cat $(agent.builddirectory)/index.html
+        # - download: myappbuild
+        #   artifact: drop
+        # - task: CopyFiles@2
+        #   inputs:
+        #     sourceFolder: '$(PIPELINE.WORKSPACE)/myappbuild/drop/' # Optional
+        #     contents: '**' 
+        #     targetFolder: $(agent.builddirectory)/
+        #     cleanTargetFolder: true # Optional
+        #     overWrite: false # Optional
+        #     #flattenFolders: false # Optional
+        #     preserveTimestamp: true # Optional
+
+        # - script: |  
+        #     cat $(agent.builddirectory)/index.html
