@@ -28,5 +28,5 @@ jobs:
       includeRootFolder: false
       archiveFile: $(Build.ArtifactStagingDirectory)/src/
       replaceExistingArchive: true
-  - upload: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
+  - upload: $(Build.ArtifactStagingDirectory)/src/
     artifact: drop
