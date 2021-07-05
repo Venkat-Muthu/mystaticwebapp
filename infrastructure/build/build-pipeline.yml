@@ -21,12 +21,29 @@ jobs:
   - script: | 
       echo 'compile application'
     displayName: 'compile'
-  - task: ArchiveFiles@2
-    displayName: 'Archive files'
+
+  - task: CopyFiles@2
     inputs:
-      rootFolderOrFile: '$(System.DefaultWorkingDirectory)/src/'
-      includeRootFolder: false
-      archiveFile: $(Build.ArtifactStagingDirectory)/src/
-      replaceExistingArchive: true
-  - upload: $(Build.ArtifactStagingDirectory)/src/
-    artifact: drop
+      sourceFolder: '$(System.DefaultWorkingDirectory)/src/' # Optional
+      contents: '**' 
+      targetFolder: $(Build.ArtifactStagingDirectory)/src/
+      cleanTargetFolder: true # Optional
+      overWrite: false # Optional
+      #flattenFolders: false # Optional
+      preserveTimestamp: true # Optional
+
+  # - task: ArchiveFiles@2
+  #   displayName: 'Archive files'
+  #   inputs:
+  #     rootFolderOrFile: '$(System.DefaultWorkingDirectory)/src/'
+  #     includeRootFolder: false
+  #     archiveFile: $(Build.ArtifactStagingDirectory)/src/
+  #     replaceExistingArchive: true
+
+  - task: PublishBuildArtifacts@1
+    inputs:
+      pathToPublish: $(Build.ArtifactStagingDirectory)/src/
+      artifactName: drop
+
+  # - upload: $(Build.ArtifactStagingDirectory)/src/
+  #   artifact: drop
