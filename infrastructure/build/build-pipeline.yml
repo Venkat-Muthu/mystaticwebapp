@@ -26,8 +26,7 @@ jobs:
     inputs:
       rootFolderOrFile: '$(System.DefaultWorkingDirectory)/src/'
       includeRootFolder: false
-      archiveType: zip
-      archiveFile: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
+      archiveFile: $(Build.ArtifactStagingDirectory)/src/
       replaceExistingArchive: true
   - upload: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
     artifact: drop
