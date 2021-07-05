@@ -27,7 +27,7 @@ jobs:
           artifact: drop
         - task: CopyFiles@2
           inputs:
-            sourceFolder: '$(PIPELINE.WORKSPACE)/drop/' # Optional
+            sourceFolder: '$(PIPELINE.WORKSPACE)/myappbuild/drop/' # Optional
             contents: '**' 
             targetFolder: $(agent.builddirectory)/
             cleanTargetFolder: true # Optional
@@ -36,4 +36,4 @@ jobs:
             preserveTimestamp: true # Optional
 
         - script: |  
-            cat $(agent.builddirectory)/src/index.html
+            cat $(agent.builddirectory)/index.html
