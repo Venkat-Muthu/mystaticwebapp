@@ -24,11 +24,16 @@ jobs:
       deploy:
         steps:          
         - download: myappbuild
-          artifact: drop  
-        - task: ExtractFiles@1
+          artifact: drop
+        - task: CopyFiles@2
           inputs:
-            archiveFilePatterns: '$(PIPELINE.WORKSPACE)/myappbuild/drop/$(resources.pipeline.myappbuild.runID).zip'
-            destinationFolder: '$(agent.builddirectory)'
-            cleanDestinationFolder: false
+            sourceFolder: '$(PIPELINE.WORKSPACE)/drop/' # Optional
+            contents: '**' 
+            targetFolder: $(agent.builddirectory)/
+            cleanTargetFolder: true # Optional
+            overWrite: false # Optional
+            #flattenFolders: false # Optional
+            preserveTimestamp: true # Optional
+
         - script: |  
             cat $(agent.builddirectory)/src/index.html
