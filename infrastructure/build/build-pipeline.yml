@@ -21,6 +21,22 @@ jobs:
   - script: | 
       echo 'compile application'
     displayName: 'compile'
+  - task: Bash@3
+    inputs:
+      targetType: inline
+      script: |
+        echo 'getting current datetime' 
+        currentDate=`date +"%Y-%m-%d %T"`;
+        echo "currentDate : $currentDate"
+        echo 'getting current directory files' 
+        ls
+        echo 'changing directory to src'
+        cd src
+        echo 'executing sed'
+        sed -i "s/datetimeplaceholder/$currentDate/" index.html
+                  
+        echo 'displaying content of index.html'
+        cat index.html
 
   - task: CopyFiles@2
     inputs:
@@ -32,18 +48,19 @@ jobs:
       #flattenFolders: false # Optional
       preserveTimestamp: true # Optional
 
-  # - task: ArchiveFiles@2
-  #   displayName: 'Archive files'
-  #   inputs:
-  #     rootFolderOrFile: '$(System.DefaultWorkingDirectory)/src/'
-  #     includeRootFolder: false
-  #     archiveFile: $(Build.ArtifactStagingDirectory)/src/
-  #     replaceExistingArchive: true
-
   - task: PublishBuildArtifacts@1
     inputs:
       pathToPublish: $(Build.ArtifactStagingDirectory)/src/
       artifactName: drop
+
+  # - task: ArchiveFiles@2
+  #   displayName: 'Archive files'
+  #   inputs:
+  #     rootFolderOrFile: '$(System.DefaultWorkingDirectory)/src'
+  #     includeRootFolder: false
+  #     archiveType: zip
+  #     archiveFile: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
+  #     replaceExistingArchive: true
 
   # - upload: $(Build.ArtifactStagingDirectory)/src/
   #   artifact: drop
