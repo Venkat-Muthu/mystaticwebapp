@@ -28,7 +28,9 @@ steps:
       az --version
       echo ${AZURE_DEVOPS_CLI_PAT} | az devops login
       az account show
+      echo 'az devops configure'
       az devops configure --defaults organization=$(System.TeamFoundationCollectionUri) project=$(System.TeamProject)
+      echo 'az devops variable-group'
       az pipelines variable-group create --name var-group --variables env='test' env1='test2' env2=${{parameters.config}} --authorize true --detect true --subscription 7fe50eb0-0f9b-4400-b7b4-cd2881c5bb06
 
 - script: |
