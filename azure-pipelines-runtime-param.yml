@@ -6,6 +6,7 @@
 parameters:
   - name: config
     type: string
+    default:'test3'
 
 trigger:
 - main
