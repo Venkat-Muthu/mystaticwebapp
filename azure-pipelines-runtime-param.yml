@@ -26,7 +26,13 @@ steps:
     scriptLocation: inlineScript
     inlineScript: |
       az --version
+
+      echo cli-1 : ${AZURE_DEVOPS_CLI_PAT}
       echo ${AZURE_DEVOPS_CLI_PAT} | az devops login
+
+      echo cli-2 : $(PipelineAccessToken)
+      echo "$(PipelineAccessToken)" | az devops login
+
       az account show
       echo az devops configure - $(System.TeamFoundationCollectionUri) - $(System.TeamProject)
       az devops configure --defaults organization=$(System.TeamFoundationCollectionUri) project=$(System.TeamProject)
