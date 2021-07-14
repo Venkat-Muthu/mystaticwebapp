@@ -17,6 +17,17 @@ steps:
 - script: echo Hello, world! - ${{parameters.config}}
   displayName: 'Run a one-line script'
 
+- task: AzureCLI@2
+  displayName: Azure CLI
+  inputs:
+    azureSubscription: <Name of the Azure Resource Manager service connection>
+    scriptType: ps
+    scriptLocation: inlineScript
+    inlineScript: |
+      az --version
+      az account show
+      az pipelines variable-group creat --name var-group --variables env='test' env1='test2' env2=${{parameters.config}}
+
 - script: |
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
