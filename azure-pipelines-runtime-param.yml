@@ -30,7 +30,7 @@ steps:
       echo cli-1 : ${AZURE_DEVOPS_CLI_PAT}
       echo ${AZURE_DEVOPS_CLI_PAT} | az devops login
 
-      echo cli-2 : $(PipelineAccessToken)
+      echo cli-2 : - $(PipelineAccessToken) - $(System.AccessToken) -
       echo "$(PipelineAccessToken)" | az devops login
 
       az account show
