@@ -25,7 +25,7 @@ steps:
     scriptType: bash
     scriptLocation: inlineScript
     inlineScript: |
-      RAN_DIGITS = head /dev/urandom | tr -dc a-z0-9 | fold -w 10 | head -n 1
+      RAN_DIGITS=(head /dev/urandom | tr -dc a-z0-9 | fold -w 10 | head -n 1)
       echo $RAN_DIGITS
       echo some randon number $RAN_DIGITS 
       az --version
