@@ -20,7 +20,7 @@ steps:
 - task: AzureCLI@2
   displayName: Azure CLI
   inputs:
-    azureSubscription: $(System.AccessToken)
+    azureSubscription: ServiceConnection-subscription
     scriptType: ps
     scriptLocation: inlineScript
     inlineScript: |
