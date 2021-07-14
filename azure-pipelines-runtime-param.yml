@@ -26,6 +26,7 @@ steps:
     scriptLocation: inlineScript
     inlineScript: |
       az --version
+      echo ${AZURE_DEVOPS_CLI_PAT} | az devops login
       az account show
       az devops configure --defaults organization=$(System.TeamFoundationCollectionUri) project=$(System.TeamProject)
       az pipelines variable-group create --name var-group --variables env='test' env1='test2' env2=${{parameters.config}}
