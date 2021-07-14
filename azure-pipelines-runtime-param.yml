@@ -25,7 +25,8 @@ steps:
     scriptType: bash
     scriptLocation: inlineScript
     inlineScript: |
-      echo some randon number "head /dev/urandom | tr -dc a-z0-9 | fold -w 10 | head -n 1"
+      $randon = "head /dev/urandom | tr -dc a-z0-9 | fold -w 10 | head -n 1"
+      echo some randon number $randon 
       az --version
       echo cli-2 : - $(System.AccessToken) -
       echo $(System.AccessToken) | az devops login
